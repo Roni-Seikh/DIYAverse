@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%">
+      <stop offset="0" stop-color="#2a1458"/>
+      <stop offset="1" stop-color="#0b0a24"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffb347" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#ffb347" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bowl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e9a23b"/>
+      <stop offset="1" stop-color="#8f3f12"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="900" cy="300" r="260" fill="url(#glow)"/>
+  <g fill="#ffd27a">
+    <circle cx="120" cy="90" r="3"/><circle cx="300" cy="520" r="2.5"/><circle cx="560" cy="70" r="2"/>
+    <circle cx="1090" cy="110" r="3"/><circle cx="1010" cy="540" r="2.5"/><circle cx="700" cy="560" r="2"/>
+  </g>
+  <path d="M900 180c26 36 46 58 46 88a46 46 0 0 1-92 0c0-30 20-52 46-88z" fill="#ffd27a"/>
+  <path d="M780 330h240c0 52-48 92-120 92s-120-40-120-92z" fill="url(#bowl)"/>
+  <ellipse cx="900" cy="330" rx="120" ry="16" fill="#ffcf6b"/>
+  <text x="80" y="290" font-family="Georgia, serif" font-size="108" font-weight="700" fill="#fff4dc">DIYAverse</text>
+  <text x="84" y="350" font-family="Georgia, serif" font-size="36" fill="#ffc15e">The Living Festival of Lights</text>
+  <text x="84" y="420" font-family="Arial, sans-serif" font-size="26" fill="#cfc7ee">One Light. One Wish. One Connected World.</text>
+</svg>

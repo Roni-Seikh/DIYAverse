@@ -1,0 +1,29 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // The shared wall: anyone can read, anyone can add ONE well-formed light, nobody can edit or delete.
+    match /diyas/{id} {
+      allow read: if true;
+      allow create: if validDiya(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    // Everything else is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function validDiya(d) {
+      return d.keys().hasAll(['name', 'wish', 'design', 'color', 'createdAt'])
+        && d.keys().hasOnly(['name', 'wish', 'design', 'color', 'createdAt', 'region'])
+        && d.name is string && d.name.size() >= 1 && d.name.size() <= 24
+        && d.wish is string && d.wish.size() >= 3 && d.wish.size() <= 140
+        && d.design in ['clay', 'lotus', 'brass', 'peacock']
+        && d.color in ['gold', 'ember', 'rose', 'teal', 'violet']
+        && d.createdAt == request.time
+        && (!('region' in d) || (d.region is string && d.region.size() <= 30));
+    }
+  }
+}

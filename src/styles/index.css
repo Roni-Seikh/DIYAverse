@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night-950: #070618;
+  --color-night-900: #0b0a24;
+  --color-night-800: #14123a;
+  --color-night-700: #1f1b52;
+  --color-plum-600: #4a2a8a;
+  --color-gold-300: #ffe08a;
+  --color-gold-400: #ffc95c;
+  --color-gold-500: #f7a928;
+  --color-amber-600: #e07b12;
+  --color-ember: #ff6a3d;
+  --color-rose-diya: #ff4d8d;
+  --color-teal-diya: #3fd6c4;
+  --color-ink-100: #fff6e2;
+  --color-ink-300: #d6cdf0;
+  --color-ink-400: #b4aad6;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", "Hind", "Noto Sans Bengali", system-ui, sans-serif;
+}
+
+:root { color-scheme: dark; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-night-900);
+  color: var(--color-ink-100);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Layered night-sky backdrop used across pages */
+.sky {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(120, 70, 200, 0.35), transparent 60%),
+    radial-gradient(900px 500px at 0% 20%, rgba(247, 169, 40, 0.08), transparent 60%),
+    linear-gradient(180deg, #0b0a24 0%, #120f33 60%, #0b0a24 100%);
+}
+
+.font-display { font-family: var(--font-display); }
+
+.gold-text {
+  background: linear-gradient(180deg, #fff1c2 0%, #ffc95c 55%, #f09a1c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.panel {
+  background: rgba(20, 18, 58, 0.72);
+  border: 1px solid rgba(255, 201, 92, 0.16);
+  border-radius: 1.25rem;
+  backdrop-filter: blur(10px);
+}
+
+.btn-gold {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .8rem 1.4rem; border-radius: 999px; font-weight: 600;
+  color: #2a1400;
+  background: linear-gradient(180deg, #ffe08a, #f7a928);
+  box-shadow: 0 6px 24px rgba(247, 169, 40, 0.35);
+  transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+  cursor: pointer; border: 0;
+}
+.btn-gold:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(247, 169, 40, 0.5); }
+.btn-gold:active { transform: translateY(0); }
+.btn-gold:disabled { filter: grayscale(.7) brightness(.8); cursor: not-allowed; transform: none; }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .75rem 1.25rem; border-radius: 999px; font-weight: 500;
+  color: var(--color-ink-100);
+  border: 1px solid rgba(255, 201, 92, 0.35);
+  background: rgba(255, 255, 255, 0.03);
+  transition: background .2s ease, border-color .2s ease;
+  cursor: pointer;
+}
+.btn-ghost:hover { background: rgba(255, 201, 92, 0.1); border-color: rgba(255, 201, 92, 0.6); }
+.btn-ghost:disabled { opacity: .45; cursor: not-allowed; }
+
+.field {
+  width: 100%; padding: .7rem .9rem; border-radius: .75rem;
+  background: rgba(7, 6, 24, 0.7);
+  border: 1px solid rgba(180, 170, 214, 0.3);
+  color: var(--color-ink-100);
+  font: inherit;
+}
+.field::placeholder { color: rgba(180, 170, 214, 0.6); }
+.field:hover { border-color: rgba(255, 201, 92, 0.5); }
+
+.lbl { display: block; font-size: .8rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--color-ink-300); margin-bottom: .35rem; }
+
+:focus-visible { outline: 2px solid var(--color-gold-400); outline-offset: 3px; border-radius: 6px; }
+
+@keyframes flicker {
+  0%, 100% { transform: scale(1) rotate(-1deg); opacity: 1; }
+  25% { transform: scale(1.04, 0.96) rotate(1.5deg); opacity: .95; }
+  50% { transform: scale(0.97, 1.05) rotate(-0.5deg); opacity: 1; }
+  75% { transform: scale(1.03, 0.98) rotate(1deg); opacity: .92; }
+}
+@keyframes ignite {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.25); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.flame {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: ignite .8s cubic-bezier(.2,.9,.3,1.2) both, flicker 1.6s ease-in-out .8s infinite;
+}
+
+@keyframes pulse-glow { 0%, 100% { opacity: .55; } 50% { opacity: .9; } }
+.glow-pulse { animation: pulse-glow 3s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .flame, .glow-pulse { animation: none; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+.sr-only-skip {
+  position: absolute; left: -999px; top: 0; background: #ffc95c; color: #2a1400; padding: .6rem 1rem; z-index: 100;
+}
+.sr-only-skip:focus { left: 1rem; top: 1rem; }
