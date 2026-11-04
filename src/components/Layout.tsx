@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { Menu, Sparkles, X } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { SparkleTrail } from './motion'
+import { useEffects } from '@/lib/EffectsContext'
 import { Logo } from './Logo'
 import { CloudBadge } from './CloudBadge'
 
 const NAV = [
+  { to: '/discover', label: 'Discover' },
   { to: '/light', label: 'Light a Diya' },
   { to: '/wishes', label: 'Wish Studio' },
   { to: '/rangoli', label: 'Rangoli' },
@@ -17,6 +21,7 @@ const NAV = [
 
 const TITLES: Record<string, string> = {
   '/': 'DIYAverse — The Living Festival of Lights',
+  '/discover': 'Discover Diwali · DIYAverse',
   '/light': 'Light Your Diya · DIYAverse',
   '/wishes': 'Wish Studio · DIYAverse',
   '/rangoli': 'Rangoli Studio · DIYAverse',
@@ -30,6 +35,7 @@ const TITLES: Record<string, string> = {
 export function Layout() {
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
+  const { userPref, reducedMotion, toggle } = useEffects()
 
   useEffect(() => {
     setOpen(false)
@@ -38,7 +44,7 @@ export function Layout() {
   }, [pathname])
 
   const linkCls = ({ isActive }: { isActive: boolean }) =>
-    `rounded-full px-3 py-1.5 text-sm transition-colors ${isActive ? 'bg-gold-400/15 text-gold-300' : 'text-ink-300 hover:text-ink-100 hover:bg-white/5'}`
+    `rounded-full px-2.5 py-1.5 text-sm transition-all hover:-translate-y-0.5 ${isActive ? 'bg-gold-400/15 text-gold-300' : 'text-ink-300 hover:text-ink-100 hover:bg-white/5'}`
 
   const immersive = pathname === '/night'
 
@@ -53,7 +59,7 @@ export function Layout() {
             <Link to="/" aria-label="DIYAverse home">
               <Logo />
             </Link>
-            <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+            <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Main">
               {NAV.map((n) => (
                 <NavLink key={n.to} to={n.to} className={linkCls}>
                   {n.label}
@@ -61,11 +67,21 @@ export function Layout() {
               ))}
             </nav>
             <div className="flex items-center gap-2">
+              <button
+                className="btn-ghost !p-2"
+                onClick={toggle}
+                disabled={reducedMotion}
+                aria-pressed={userPref && !reducedMotion}
+                aria-label={reducedMotion ? 'Decorative effects are off because your device asks for reduced motion' : userPref ? 'Turn decorative effects off' : 'Turn decorative effects on'}
+                title={reducedMotion ? 'Reduced motion is on' : userPref ? 'Effects on' : 'Effects off'}
+              >
+                <Sparkles size={18} className={userPref && !reducedMotion ? 'text-gold-300' : 'text-ink-400'} />
+              </button>
               <span className="hidden sm:block">
                 <CloudBadge />
               </span>
               <button
-                className="btn-ghost !p-2 lg:hidden"
+                className="btn-ghost !p-2 xl:hidden"
                 aria-label={open ? 'Close menu' : 'Open menu'}
                 aria-expanded={open}
                 aria-controls="mobile-nav"
@@ -76,7 +92,7 @@ export function Layout() {
             </div>
           </div>
           {open && (
-            <nav id="mobile-nav" className="border-t border-gold-400/10 px-4 pb-4 pt-2 lg:hidden" aria-label="Mobile">
+            <nav id="mobile-nav" className="border-t border-gold-400/10 px-4 pb-4 pt-2 xl:hidden" aria-label="Mobile">
               <div className="mb-3 sm:hidden">
                 <CloudBadge />
               </div>
@@ -91,9 +107,10 @@ export function Layout() {
           )}
         </header>
       )}
-      <main id="main">
+      <SparkleTrail disabled={immersive} />
+      <motion.main id="main" key={pathname} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: 'easeOut' }}>
         <Outlet />
-      </main>
+      </motion.main>
       {!immersive && (
         <footer className="mt-24 border-t border-gold-400/10 bg-night-950/60">
           <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 md:grid-cols-3">

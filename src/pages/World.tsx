@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AlertTriangle, Flame, Search } from 'lucide-react'
 import { Diya } from '@/components/Diya'
+import { TiltCard } from '@/components/motion'
 import { CloudBadge } from '@/components/CloudBadge'
 import { useToast } from '@/components/Toast'
 import { useDiyas } from '@/lib/DiyaContext'
@@ -182,7 +183,8 @@ export default function World() {
               </p>
               <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                 {list.slice(0, shown).map((d) => (
-                  <li key={d.id} className="panel flex flex-col items-center p-4 text-center">
+                  <li key={d.id}>
+                   <TiltCard className="panel flex h-full flex-col items-center p-4 text-center">
                     <Diya design={d.design} color={d.color} lit className="w-24" />
                     <p className="font-display mt-1 text-xl text-ink-100">{d.name}</p>
                     <p className="mt-1 line-clamp-4 break-words text-sm text-ink-300">“{d.wish}”</p>
@@ -191,6 +193,7 @@ export default function World() {
                       {d.region && <span>· {d.region}</span>}
                       {d.source === 'local' && <span className="rounded-full border border-ink-400/40 px-2 py-0.5">Local only</span>}
                     </div>
+                   </TiltCard>
                   </li>
                 ))}
               </ul>

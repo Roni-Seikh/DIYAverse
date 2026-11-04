@@ -28,6 +28,8 @@ DIYAverse makes visitors participants. Each light they add becomes a point in a 
 | Infinity of Light | Canvas mandala, zoom/pan/pinch, hover + click story, colour filter, keyboard navigation |
 | Festival Night | Fireworks, lanterns, synthesised music + ambience (off by default), full screen |
 | Impact | Counts computed from real data only; clearly labelled local vs shared |
+| Discover Diwali | Live countdown to Lakshmi Puja (8 Nov 2026), interactive five-day timeline, 7 regional-tradition flip cards, 8-question quiz with explanations, saved preparation checklist, "celebrate with care" tips |
+| Motion & polish | Hanging string lights, falling marigold petals, cursor sparkle trail, 3D-tilt cards, scroll reveals, animated counters, shimmering title, page transitions. One-click **Effects** toggle in the header; all decorative motion is off for `prefers-reduced-motion` |
 
 ## 5. Stack
 React 19 · Vite · TypeScript · Tailwind CSS 4 · Framer Motion · Lucide · HTML5 Canvas · React Router · Firebase Firestore (optional) · Gemini API (optional, server-side) · Vercel.
@@ -53,8 +55,8 @@ One working, honest integration beats two decorative ones. Firestore's real-time
 ```
 api/wish.ts            Gemini serverless endpoint (optional)
 firestore.rules        Security rules for the shared wall
-src/components/        Diya, ParticleField, InfinityCanvas, Layout, Toast, CloudBadge…
-src/pages/             Home, LightDiya, WishStudio, RangoliStudio, World, Infinity, FestivalNight, Impact, About, NotFound
+src/components/        motion (Reveal, TiltCard, CountUp, StringLights, Petals, SparkleTrail), Countdown, Diya, ParticleField, InfinityCanvas, Layout, Toast, CloudBadge…
+src/pages/             Home, Discover, LightDiya, WishStudio, RangoliStudio, World, Infinity, FestivalNight, Impact, About, NotFound
 src/lib/               DiyaContext, firebase, wishes, rangoli, cards, audio, sanitize, share…
 ```
 
@@ -81,6 +83,7 @@ See [`.env.example`](.env.example). All optional. Firebase `VITE_*` values are p
 - Free-tier Gemini content may be used by Google to improve its products; do not enter private data.
 
 ## 12. Known limitations
+- Festival dates (6–10 Nov 2026) follow commonly published calendars; timings differ by region and panchang, and the app says so. Update `src/data/diwali.ts` each year.
 - Hindi/Bengali offline greetings are template-based and were checked for grammar and formality agreement, but should be reviewed by a native speaker before relying on them.
 - Greeting-card export needs the web fonts to load; offline it falls back to system fonts.
 - The Infinity of Light is tuned for a few thousand lights; the wall loads the latest 300.

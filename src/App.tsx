@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import Home from './pages/Home'
 
+const Discover = lazy(() => import('./pages/Discover'))
 const LightDiya = lazy(() => import('./pages/LightDiya'))
 const WishStudio = lazy(() => import('./pages/WishStudio'))
 const RangoliStudio = lazy(() => import('./pages/RangoliStudio'))
@@ -30,6 +31,7 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="discover" element={<Discover />} />
           <Route path="light" element={<LightDiya />} />
           <Route path="wishes" element={<WishStudio />} />
           <Route path="rangoli" element={<RangoliStudio />} />

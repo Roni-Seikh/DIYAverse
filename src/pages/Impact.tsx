@@ -6,7 +6,7 @@ import { DESIGNS, FLAMES, FLAME_KEYS } from '@/data/palette'
 
 function Stat({ label, value, hint }: { label: string; value: number | string; hint?: string }) {
   return (
-    <div className="panel p-5">
+    <div className="panel panel-hover p-5">
       <p className="text-xs font-semibold uppercase tracking-widest text-ink-400">{label}</p>
       <p className="font-display mt-1 text-5xl font-bold gold-text">{value}</p>
       {hint && <p className="mt-1 text-xs text-ink-400">{hint}</p>}

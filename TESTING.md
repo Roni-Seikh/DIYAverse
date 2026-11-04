@@ -18,3 +18,6 @@ A headless-browser smoke test also confirmed: no page errors on any route at 128
 **Festival Night** tap sky; Celebrate; toggles; sound off by default; full screen.
 **Accessibility** keyboard-only pass; visible focus; enable OS "reduce motion" (intro skipped, calmer effects).
 **Firebase** follow FIREBASE_SETUP.md; disconnect network and confirm the badge falls back honestly.
+
+**Discover** countdown ticks; timeline tabs switch and today's day is preselected during the festival; flip cards turn on hover, keyboard focus and tap; quiz gives feedback and a score (best score persists); checklist progress persists after reload.
+**Effects** header sparkle button turns trail, petals, string-light twinkle and tilt off; with OS reduce-motion enabled the button is disabled and effects stay off.
